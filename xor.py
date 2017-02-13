@@ -1,3 +1,5 @@
+from __future__ import print_function
+
 import pandas as pd
 import numpy as np
 from keras.models import Sequential
@@ -41,8 +43,10 @@ train_y = df[:ttr,-1]
 test_X = df[ttr:,:-1]
 test_y = df[ttr:,-1]
 
-print("Training size:", len(train_X), "\n\tTesting size:", len(test_X))
 
+hidden_size = 8
+print("Training size:", len(train_X), "\n\tTesting size:", len(test_X))
+print("Number of hidden states:", hidden_size)
 # now we build the model!
 # we first define the type of model, in this case sequential
 # which means each layer feeds into the others sequentially (duh)
@@ -52,7 +56,7 @@ model = Sequential()
 # it's a fully connected layer with 4 hidden nodes
 # for the first layer you NEED to specify the input dimensions
 # in this case, a 2-long vector for XOR
-model.add(Dense(4, input_dim = 2, activation="sigmoid"))
+model.add(Dense(hidden_size, input_dim = 2, activation="sigmoid"))
 
 # second and final layer, because we are predicting a 1-long vector
 # the number of nodes is 1 - which is the same dimensions as our
